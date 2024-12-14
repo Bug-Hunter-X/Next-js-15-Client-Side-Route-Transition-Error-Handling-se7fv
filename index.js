@@ -1,0 +1,28 @@
+```javascript
+// pages/about.js
+import { ErrorBoundary } from 'react-error-boundary';
+
+function ErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
+
+export default function About() {
+  throw new Error('Something went wrong!');
+}
+
+function MyComponent() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <About/>
+    </ErrorBoundary>
+  );
+}
+
+export default MyComponent;
+```
